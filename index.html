@@ -2,66 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr.MohammedKhani Links</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Noto+Nastaliq+Urdu:wght@400;700&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
-        <div class="left-text">
-            <h2>دکتۆر محی الدین محمدخانی</h2>
-            <ul class="occupations">
-                <li>بەرپرسی بەشی توێژینەوە - زانکۆی سلێمانی</li>
-                <li>ژینگەدۆست</li>
-                <li>مامۆستای زانکۆ - زانکۆی سلێمانی</li>
-            </ul>
-        </div>
-        <div class="links-wrapper">
-            <a href="#" class="link-box" id="instagram">
-                <i class="fab fa-instagram"></i>
-                <h3>Instagram</h3>
-            </a>
-            <a href="#" class="link-box" id="facebook">
-                <i class="fab fa-facebook"></i>
-                <h3>Facebook</h3>
-            </a>
-            <a href="#" class="link-box" id="website">
-                <i class="fas fa-globe"></i>
-                <h3>Website</h3>
-            </a>
-            <a href="#" class="link-box" id="youtube">
-                <i class="fab fa-youtube"></i>
-                <h3>Youtube</h3>
-            </a>
-            <a href="#" class="link-box" id="tiktok">
-                <i class="fab fa-tiktok"></i>
-                <h3>Tiktok</h3>
-            </a>
-            <a href="#" class="link-box" id="email">
-                <i class="fas fa-envelope"></i>
-                <h3>Email</h3>
-            </a>
-            <a href="#" class="link-box" id="telegram">
-                <i class="fab fa-telegram"></i>
-                <h3>Telegram</h3>
-            </a>
-        </div>
+
+<div class="container">
+
+    <div class="left-text">
+        <h2>دکتۆر محی الدین محمدخانی</h2>
     </div>
-</body>
-</html>
+
+    <div class="links-wrapper" id="dock">
+        <a href="#" class="link-box"><i class="fab fa-instagram"></i><h3>Instagram</h3></a>
+        <a href="#" class="link-box"><i class="fab fa-facebook"></i><h3>Facebook</h3></a>
+        <a href="#" class="link-box"><i class="fas fa-globe"></i><h3>Website</h3></a>
+        <a href="#" class="link-box"><i class="fab fa-youtube"></i><h3>Youtube</h3></a>
+        <a href="#" class="link-box"><i class="fab fa-tiktok"></i><h3>Tiktok</h3></a>
+        <a href="#" class="link-box"><i class="fas fa-envelope"></i><h3>Email</h3></a>
+        <a href="#" class="link-box"><i class="fab fa-telegram"></i><h3>Telegram</h3></a>
+    </div>
+
+</div>
+
+<footer class="designer">
+    Designed by <span><a href="https://www.hiwafareeq.dev/">Hiwa Fareeq</a></span>
+</footer>
+
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const items = document.querySelectorAll('.left-text .occupations li');
-    if (!items.length) return;
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-        items.forEach(li => li.classList.add('visible'));
-        return;
-    }
-    items.forEach((li, i) => {
-        setTimeout(() => li.classList.add('visible'), i * 150);
+const dock = document.getElementById('dock');
+const icons = dock.querySelectorAll('.link-box');
+
+dock.addEventListener('mousemove', (e) => {
+    icons.forEach(icon => {
+        const rect = icon.getBoundingClientRect();
+        const iconCenter = rect.left + rect.width / 2;
+        const distance = Math.abs(e.clientX - iconCenter);
+
+        let scale = 1;
+        if (distance < 150) {
+            scale = 1 + (150 - distance) / 150 * 0.25;
+        }
+
+        icon.style.transform = `scale(${scale})`;
     });
 });
+
+dock.addEventListener('mouseleave', () => {
+    icons.forEach(icon => icon.style.transform = 'scale(1)');
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    var occupations = [
+        'بەرپرسی بەشی توێژینەوە - زانکۆی سلێمانی',
+        'ژینگەدۆست',
+        'مامۆستای زانکۆ - زانکۆی سلێمانی'
+    ];
+
+    var leftText = document.querySelector('.left-text');
+    var ul = document.createElement('ul');
+    ul.className = 'occupations';
+
+    var items = occupations.map(function (text) {
+        var li = document.createElement('li');
+        li.textContent = text;
+        ul.appendChild(li);
+        return li;
+    });
+
+    leftText.appendChild(ul);
+
+    var current = 0;
+    var FADE_DURATION = 600;
+    var DISPLAY_TIME = 3000;
+
+    function showNext() {
+        var li = items[current];
+        li.classList.add('visible');
+
+        setTimeout(function () {
+            li.classList.remove('visible');
+            current = (current + 1) % items.length;
+            showNext();
+        }, DISPLAY_TIME);
+    }
+
+    showNext();
+});
 </script>
+
+</body>
+</html>

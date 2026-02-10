@@ -4,60 +4,71 @@
     box-sizing: border-box;
 }
 
+/* =========================
+   BODY / BACKGROUND
+========================= */
+
 body {
-    background-image: url('./dr.khani\ \(1\).avif'); /* Replace with your BG image path */
+    background-image: url('./dr.khani.avif');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 40px;
-    overflow-y: auto;
+    overflow-x: hidden;
+    color: white;
 }
 
-/* Left text block (desktop: left) */
+/* Mobile Background */
+@media (max-width: 768px) {
+    body {
+        background-image: url('./dr.khani-mob.avif');
+        background-position: center top;
+        background-attachment: scroll;
+    }
+}
+
+.container {
+    padding: 40px;
+}
+
+/* =========================
+   LEFT TEXT SECTION
+========================= */
+
 .left-text {
-    max-width: 420px;
-    color: white;
+    max-width: 500px;
     position: fixed;
     right: 40px;
     top: 40px;
     text-align: right;
-    z-index: 55;
+    z-index: 50;
 }
-.left-text h2 {
-    font-size: 36px;
-    margin-bottom: 12px;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    letter-spacing: 0.4px;
-    line-height: 1.05;
-    color: #ffffff;
-    text-shadow: 0 6px 18px rgba(0,0,0,0.55);
-}
-.left-text p {
-    font-size: 18px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
 
-/* Occupations list styling */
+.left-text h2 {
+    font-size: 38px;
+    font-family: 'Noto Nastaliq Urdu', serif;
+    font-weight: 700;
+    text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    line-height: 1.2;
+}
+
 .left-text .occupations {
     list-style: none;
-    padding: 0;
-    margin: 6px 0 0 0;
+    margin-top: 15px;
+    min-height: 40px;
+    position: relative;
 }
+
 .left-text .occupations li {
-    font-size: 20px;
-    font-family: 'Montserrat', sans-serif;
-    color: rgba(255,255,255,0.95);
-    margin: 8px 0;
+    position: absolute;
+    right: 0;
     opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 600ms cubic-bezier(.2,.9,.2,1), transform 600ms cubic-bezier(.2,.9,.2,1);
+    transform: translateY(15px);
+    transition: all 0.6s ease;
+    font-family: 'Noto Nastaliq Urdu', serif;
+    font-size: 20px;
+    width: 100%;
 }
 
 .left-text .occupations li.visible {
@@ -65,214 +76,146 @@ body {
     transform: translateY(0);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .left-text .occupations li {
-        transition: none !important;
-        opacity: 1 !important;
-        transform: none !important;
-    }
-}
-    opacity: 0.95;
-    max-width: 520px;
-}
+/* =========================
+   DOCK / LINKS (DESKTOP)
+========================= */
 
-/* Links row fixed at bottom and centered (desktop) */
 .links-wrapper {
     display: flex;
-    gap: 28px;
-    width: auto;
     justify-content: center;
+    align-items: flex-end;
+    gap: 4rem;
     position: fixed;
     left: 50%;
+    width: 100%;
     transform: translateX(-50%);
-    bottom: 24px; /* distance from bottom */
+    bottom: 70px;
+    flex-wrap: wrap;
     z-index: 60;
-    background: transparent;
-    padding: 8px 16px;
-    align-items: center;
-    white-space: nowrap;
-}
-
-.header-section {
-    margin-bottom: 60px;
-    position: fixed;
-    left: 40px;
-    top: 40px;
-    z-index: 50;
-}
-
-.logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.header-text {
-    font-size: 48px;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.header-subtitle {
-    font-size: 20px;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 0;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-.links-wrapper {
-    /* fallback/default already defined above */
 }
 
 .link-box {
-    padding: 20px;
-    background-color: transparent;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
     text-decoration: none;
     color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.link-box:hover {
-    transform: scale(1.1);
+    text-align: center;
+    transition: transform 0.25s ease;
+    transform-origin: bottom center;
 }
 
 .link-box i {
-    font-size: 32px;
-    margin-bottom: 12px;
-    display: block;
+    font-size: 34px;
+    transition: transform 0.2s ease;
 }
 
 .link-box h3 {
-    font-size: 20px;
-    margin: 0;
-    font-weight: 600;
-    color: white;
+    margin-top: 8px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 0.5px;
 }
 
-#instagram { 
-    filter: drop-shadow(0 0 10px rgba(225, 48, 108, 0.6));
-}
+/* =========================
+   TABLET
+========================= */
 
-#instagram:hover {
-    filter: drop-shadow(0 0 20px rgba(225, 48, 108, 1));
-}
-
-#facebook { 
-    filter: drop-shadow(0 0 10px rgba(24, 119, 242, 0.6));
-}
-
-#facebook:hover {
-    filter: drop-shadow(0 0 20px rgba(24, 119, 242, 1));
-}
-
-#website { 
-    filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.6));
-}
-
-#website:hover {
-    filter: drop-shadow(0 0 20px rgba(255, 107, 53, 1));
-}
-
-#youtube { 
-    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6));
-}
-
-#youtube:hover {
-    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 1));
-}
-
-#tiktok { 
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.6));
-}
-
-#tiktok:hover {
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 1));
-}
-
-#email { 
-    filter: drop-shadow(0 0 10px rgba(234, 67, 53, 0.6));
-}
-
-#email:hover {
-    filter: drop-shadow(0 0 20px rgba(234, 67, 53, 1));
-}
-
-#telegram { 
-    filter: drop-shadow(0 0 10px rgba(0, 136, 204, 0.6));
-}
-
-#telegram:hover {
-    filter: drop-shadow(0 0 20px rgba(0, 136, 204, 1));
-}
-
-/* Tablet view */
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    
-    .header-section {
-        position: relative;
-        left: 0;
-        top: 0;
-        margin-bottom: 60px;
-    }
-    
-    .links-wrapper {
-        width: 100%;
-        margin-left: 0;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    /* Make descriptive text flow above content on tablet */
+
     .left-text {
         position: relative;
         right: auto;
         top: auto;
-        margin: 20px auto;
         text-align: center;
+        margin-bottom: 80px;
+    }
+
+    .left-text h2 {
+        font-size: 28px; /* smaller */
+    }
+
+    .left-text .occupations li {
+        font-size: 16px; /* smaller */
+    }
+
+    .links-wrapper {
+        gap: 25px;
+        bottom: 80px;
+    }
+
+    .link-box i {
+        font-size: 24px;
+    }
+
+    .link-box h3 {
+        font-size: 12px;
     }
 }
 
-/* Mobile view */
+/* =========================
+   MOBILE (GRID 3 COLUMNS)
+========================= */
+
 @media (max-width: 480px) {
-    .container {
-        flex-direction: column;
-        padding-left: 20px;
-        padding-right: 20px;
+
+    .left-text h2 {
+        font-size: 24px;
     }
-    
-    .header-section {
-        position: relative;
-        left: 0;
-        top: 0;
-        margin-bottom: 40px;
+
+    .left-text .occupations li {
+        font-size: 14px;
     }
-    
+
     .links-wrapper {
-        width: 100%;
-        margin-left: 0;
-        flex-direction: column;
+        position: fixed;
+        bottom: 95px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+
+        width: 90%;
+        max-width: 360px;
     }
-    
-    .header-text {
-        font-size: 32px;
+
+    .link-box {
+        text-align: center;
     }
-    
-    .header-subtitle {
-        font-size: 16px;
+
+    /* 👇 THIS centers the 7th (last) item */
+    .links-wrapper .link-box:last-child {
+        grid-column: 2 / 3;   /* place in middle column */
     }
+
+    .link-box i {
+        font-size: 26px;
+    }
+
+    .link-box h3 {
+        font-size: 13px;
+    }
+}
+
+
+/* =========================
+   DESIGNER FOOTER
+========================= */
+
+.designer {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: rgba(255,255,255,0.75);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    z-index: 40;
+}
+
+.designer span {
+    font-weight: 600;
+}
+a{
+    color: rgba(255,255,255,0.75);
 }
